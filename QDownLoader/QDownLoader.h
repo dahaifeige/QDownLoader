@@ -7,6 +7,7 @@
 class QNetworkReply;
 class QNetworkAccessManager;
 class QFile;
+class QDownLoadingTab;
 
 class QDownLoader : public QMainWindow
 {
@@ -32,4 +33,6 @@ private:
 	QNetworkReply *reply;
 	QUrl url;
 	QFile *file;
+
+	QDownLoadingTab* m_pDownLoadingTab;
 };

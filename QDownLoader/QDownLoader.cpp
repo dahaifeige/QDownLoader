@@ -1,4 +1,5 @@
 #include "QDownLoader.h"
+#include "QDownLoadingTab.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -17,7 +18,8 @@ QDownLoader::QDownLoader(QWidget *parent)
 	setPalette(palette);
 
 	ui.progressBar->hide();
-
+	m_pDownLoadingTab = new QDownLoadingTab(this);
+	ui.tabWidget->addTab(m_pDownLoadingTab, QStringLiteral("正在下载"));
 	m_pManager = new QNetworkAccessManager(this);
 	
 	connect(m_pManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(ReplyFinished(QNetworkReply*)));
@@ -47,7 +49,7 @@ void QDownLoader::imgPathToHtml(QString &path)
 void QDownLoader::ReplyFinished(QNetworkReply* reply)
 {
 	QString all = reply->readAll();//使用readAll读取所有的应答数据
-	ui.textBrowser->setText(all);
+//	ui.textBrowser->setText(all);
 	reply->deleteLater();
 }
 
@@ -113,9 +115,9 @@ void QDownLoader::on_pushButton_2_clicked()//下载按钮
 /*---------------------推荐下载实现-----------------------*/
 void QDownLoader::on_pushButton_qq_clicked()
 {
-	ui.textBrowser->clear();
+	//ui.textBrowser->clear();
 	ui.lineEdit->setText("http://dldir1.qq.com/qqfile/qq/QQ8.9.1/20453/QQ8.9.1.exe");
 	QString imgPath = QString(":/image/image/qq.jpg");
 	imgPathToHtml(imgPath);
-	ui.textBrowser->insertHtml(imgPath);
+	//ui.textBrowser->insertHtml(imgPath);
 }
